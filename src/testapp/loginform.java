@@ -6,7 +6,9 @@
 package testapp;
 
 import admin.adminDashboard;
-import static java.lang.reflect.Array.set;
+import config.dbConnector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +23,18 @@ public class loginform extends javax.swing.JFrame {
     public loginform() {
         initComponents();
     }
+    public static boolean loginAcc(String user, String pass){
+        dbConnector connector = new dbConnector();
+        try{
+            String query = "SELECT * FROM test_app  WHERE user_name = '" + user + "' AND user_pass = '" + pass + "'";
+            ResultSet resultSet = connector.getData(query);
+            return resultSet.next();
+        }catch (SQLException ex) {
+            return false;
+        }
 
+    }
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,10 +49,10 @@ public class loginform extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        usertf = new javax.swing.JTextField();
+        user = new javax.swing.JTextField();
         logintf = new javax.swing.JButton();
         exitb = new javax.swing.JButton();
-        passf = new javax.swing.JPasswordField();
+        pass = new javax.swing.JPasswordField();
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Username:");
@@ -67,9 +80,9 @@ public class loginform extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Password:");
 
-        usertf.addActionListener(new java.awt.event.ActionListener() {
+        user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usertfActionPerformed(evt);
+                userActionPerformed(evt);
             }
         });
 
@@ -104,8 +117,8 @@ public class loginform extends javax.swing.JFrame {
                         .addGap(52, 52, 52)
                         .addComponent(logintf))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(passf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                        .addComponent(usertf, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addComponent(pass, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                        .addComponent(user, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -115,12 +128,12 @@ public class loginform extends javax.swing.JFrame {
                 .addGap(100, 100, 100)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(usertf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(passf)
+                        .addComponent(pass)
                         .addGap(3, 3, 3)))
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -143,25 +156,21 @@ public class loginform extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void usertfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usertfActionPerformed
+    private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usertfActionPerformed
+    }//GEN-LAST:event_userActionPerformed
 
     private void logintfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logintfActionPerformed
-        if(usertf.getText().equals("")){
-       JOptionPane.showMessageDialog(null,"please fill out username");
-        }
-        else if (passf.getText().equals("")){
-        JOptionPane.showMessageDialog(null,"please fill out password");
-        }
-        else if (usertf.getText().contains("mark")&&(passf.getText().contains("marken123"))){
-        JOptionPane.showMessageDialog(null,"login successfully!");
-        adminDashboard admindb = new adminDashboard();
-        admindb.show();
-        dispose();
-        }
-        else{
-        JOptionPane.showMessageDialog(null, "wrong username or password!","Message",JOptionPane.ERROR_MESSAGE);
+        if(loginAcc(user.getText(),pass.getText())){
+        JOptionPane.showMessageDialog(null,"Login Successfully!");
+        adminDashboard ads = new adminDashboard();
+        ads.setVisible(true);
+        this.dispose();
+        
+        }else{
+        JOptionPane.showMessageDialog(null,"loginFailed");
+        
+        
         }
                   
     }//GEN-LAST:event_logintfActionPerformed
@@ -216,7 +225,7 @@ public class loginform extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton logintf;
-    private javax.swing.JPasswordField passf;
-    private javax.swing.JTextField usertf;
+    private javax.swing.JPasswordField pass;
+    private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }

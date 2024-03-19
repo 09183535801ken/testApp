@@ -71,8 +71,8 @@
                           <Component id="logintf" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="passf" alignment="0" pref="114" max="32767" attributes="0"/>
-                          <Component id="usertf" alignment="0" max="32767" attributes="0"/>
+                          <Component id="pass" alignment="0" pref="114" max="32767" attributes="0"/>
+                          <Component id="user" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="110" max="32767" attributes="0"/>
@@ -86,13 +86,13 @@
                   <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="usertf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="user" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="passf" max="32767" attributes="0"/>
+                          <Component id="pass" max="32767" attributes="0"/>
                           <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -143,9 +143,9 @@
             <Property name="text" type="java.lang.String" value="Password:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="usertf">
+        <Component class="javax.swing.JTextField" name="user">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usertfActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="logintf">
@@ -164,7 +164,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitbActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="passf">
+        <Component class="javax.swing.JPasswordField" name="pass">
         </Component>
       </SubComponents>
     </Container>
